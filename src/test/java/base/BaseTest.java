@@ -5,6 +5,8 @@ import helpers.factories.MobileDriversFactory;
 import helpers.factories.WebDriversFactory;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
+import modals.androidMoviesDbApp.AndroidHomeScreen;
+import modals.androidMoviesDbApp.AndroidMovieDetailsScreen;
 import models.*;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
@@ -28,6 +30,8 @@ public class BaseTest {
     protected static ThreadLocal<TestExecutionHelper> testExecutionHelper = new ThreadLocal<>();
     protected static ThreadLocal<TestData> defaultTestData = new ThreadLocal<>();
     protected static ThreadLocal<WebDriversFactory> webDriversFactory = new ThreadLocal<>();
+    protected static ThreadLocal<AndroidHomeScreen> androidHomeScreen = new ThreadLocal<>();
+    protected static ThreadLocal<AndroidMovieDetailsScreen> androidMovieDetailsScreen = new ThreadLocal<>();
 
     @BeforeMethod
     public void setup(){
@@ -84,6 +88,10 @@ public class BaseTest {
             androidDevice.set(testExecutionHelper.get().buildAndroidDeviceData(androidDevice.get()));
             androidDriver.set(mobileDriversFactory.get().buildAndroidDriver(androidAppiumServerController.get()
                     , androidDevice.get()));
+
+            //Initiating UI POMs
+            androidHomeScreen.set(new AndroidHomeScreen(androidDriver.get()));
+            androidMovieDetailsScreen.set(new AndroidMovieDetailsScreen(androidDriver.get()));
         }
 
         //iOS Driver Setup

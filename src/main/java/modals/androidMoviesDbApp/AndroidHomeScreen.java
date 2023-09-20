@@ -30,9 +30,21 @@ public class AndroidHomeScreen extends BaseAndroidScreen {
     @FindBy(id = "com.skydoves.themovies:id/action_three")
     WebElement starTabBtn;
 
+    public void waitUntilMoviesListIsDisplayed(){
+        while (movieCardPosters.size() == 0){
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public void pressMovieCard(int targetMovieListNumber){
-        if (isElementDisplayed(movieCardPosters.get(0)) && targetMovieListNumber <= movieCardPosters.size())
+        if (targetMovieListNumber <= movieCardPosters.size()){
+            wait.until(ExpectedConditions.visibilityOf(movieCardPosters.get(targetMovieListNumber-1))).isEnabled();
             wait.until(ExpectedConditions.visibilityOf(movieCardPosters.get(targetMovieListNumber-1))).click();
+        }
     }
 
     public void pressMovieName(int targetMovieListNumber){
@@ -50,5 +62,16 @@ public class AndroidHomeScreen extends BaseAndroidScreen {
 
     public void pressStarTabBtn(){
         wait.until(ExpectedConditions.visibilityOf(starTabBtn)).click();
+    }
+
+    public boolean isMoviesPostersDisplayed(){
+        try {
+            for (WebElement moviePoster : movieCardPosters){
+                wait.until(ExpectedConditions.visibilityOf(moviePoster));
+            }
+            return true;
+        } catch (Exception e){
+            return false;
+        }
     }
 }

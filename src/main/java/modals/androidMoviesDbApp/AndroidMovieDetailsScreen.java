@@ -22,6 +22,10 @@ public class AndroidMovieDetailsScreen extends BaseAndroidScreen {
     @FindBy(xpath = "//android.widget.ImageButton[@content-desc='Navigate up']")
     WebElement backBtn;
 
+    public boolean isPageDisplayed(){
+        return isElementDisplayed(movieTitle);
+    }
+
     public String getMovieTitle(){
         return wait.until(ExpectedConditions.visibilityOf(movieTitle))
                 .getText();
