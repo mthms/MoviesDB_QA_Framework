@@ -29,6 +29,7 @@ Additionally, make sure to update the `config.properties` file with your Ngrok A
 3. Configure the project with the required dependencies and libraries.
 4. Set up the `config.properties` file with the necessary configurations, including the Ngrok Auth key.
 5. Run the desired test scripts from the test suite using the test runner provided in the project.
+6. If you are planning to run android/iOS tests, you need to add the build files into resources/builds directory and modify the file names in MobileDriversFactory
 
 Ensure that the appropriate Appium drivers (`uiAutomator2` and `XCUITest`) are installed before running the tests.
 
