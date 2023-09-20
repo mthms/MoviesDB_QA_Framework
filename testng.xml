@@ -1,8 +1,13 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Cucumber Suite">
-    <test name="Cucumber Test">
+    <test name="Full Tests" parallel="methods" thread-count="1">
         <classes>
             <class name="cucumberTestRunners.RedirectionsTestRunner"/>
+<!--            <class name="redirections.RedirectionTests">-->
+<!--                <methods>-->
+<!--                    <include name="validateAppRedirection"/>-->
+<!--                </methods>-->
+<!--            </class>-->
         </classes>
     </test>
 </suite>
